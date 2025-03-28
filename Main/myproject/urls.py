@@ -16,7 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # User API endpoints
+    path('api/users/', views.user_list, name='user_list'),             # GET all users
+    path('api/users/<int:user_id>/', views.get_user, name='get_user'), # GET specific user
+    path('api/users/create/', views.user_create, name='user_create'),   # POST create user
+    path('api/users/<int:user_id>/update/', views.update_user, name='update_user'), # PUT update user
+    path('api/users/<int:user_id>/patch/', views.patch_user, name='patch_user'),    # PATCH update user
+    path('api/users/<int:user_id>/delete/', views.delete_user, name='delete_user'), # DELETE user
 ]
